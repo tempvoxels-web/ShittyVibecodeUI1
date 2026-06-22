@@ -1,0 +1,825 @@
+local VoxelsUI = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local TopBar = Instance.new("Frame")
+local Header = Instance.new("TextLabel")
+local HeaderPadding = Instance.new("UIPadding")
+local MinimizeButton = Instance.new("TextButton")
+local MinimizeCorner = Instance.new("UICorner")
+local MinimizePadding = Instance.new("UIPadding")
+local ExitButton = Instance.new("TextButton")
+local ExitCorner = Instance.new("UICorner")
+local ExitPadding = Instance.new("UIPadding")
+local Box = Instance.new("Frame")
+local Box1 = Instance.new("ScrollingFrame")
+local Box1Layout = Instance.new("UIListLayout")
+local Box1Padding = Instance.new("UIPadding")
+local ToggleButton = Instance.new("TextButton")
+local ToggleLabel = Instance.new("TextLabel")
+local ToggleLabelSizeConstraint = Instance.new("UITextSizeConstraint")
+local ToggleLabelPadding = Instance.new("UIPadding")
+local ToggleIndicator = Instance.new("Frame")
+local Button = Instance.new("TextButton")
+local ButtonPadding = Instance.new("UIPadding")
+local ButtonSizeConstraint = Instance.new("UITextSizeConstraint")
+local KeybindLabel = Instance.new("TextLabel")
+local KeybindLabelPadding = Instance.new("UIPadding")
+local KeybindLabelSizeConstraint = Instance.new("UITextSizeConstraint")
+local KeybindBox = Instance.new("TextBox")
+local KeybindBoxPadding = Instance.new("UIPadding")
+local KeybindToggleButton = Instance.new("TextButton")
+local KeybindToggleLabel = Instance.new("TextLabel")
+local KeybindToggleLabelSizeConstraint = Instance.new("UITextSizeConstraint")
+local KeybindToggleLabelPadding = Instance.new("UIPadding")
+local KeybindToggleIndicator = Instance.new("Frame")
+local KeybindToggleBox = Instance.new("TextBox")
+local KeybindToggleBoxPadding = Instance.new("UIPadding")
+local InputLabel = Instance.new("TextLabel")
+local InputLabelPadding = Instance.new("UIPadding")
+local InputLabelSizeConstraint = Instance.new("UITextSizeConstraint")
+local InputBox = Instance.new("TextBox")
+local InputBoxPadding = Instance.new("UIPadding")
+local InputBoxAspectRatio = Instance.new("UIAspectRatioConstraint")
+local TabSection = Instance.new("Frame")
+local TabList = Instance.new("ScrollingFrame")
+local TabListLayout = Instance.new("UIListLayout")
+local MainTabButton = Instance.new("TextButton")
+local MainTabCorner = Instance.new("UICorner")
+local MainTabSizeConstraint = Instance.new("UITextSizeConstraint")
+local TabListPadding = Instance.new("UIPadding")
+local PlaceholderTabButton = Instance.new("TextButton")
+local PlaceholderTabCorner = Instance.new("UICorner")
+local PlaceholderTabSizeConstraint = Instance.new("UITextSizeConstraint")
+
+VoxelsUI.Name = "VoxelsUI"
+VoxelsUI.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+VoxelsUI.ResetOnSpawn = false
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = VoxelsUI
+MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+MainFrame.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+MainFrame.BorderSizePixel = 0
+MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+MainFrame.Size = UDim2.new(0, 500, 0, 300)
+
+TopBar.Name = "TopBar"
+TopBar.Parent = MainFrame
+TopBar.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+TopBar.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TopBar.BorderSizePixel = 0
+TopBar.Size = UDim2.new(1, 0, 0, 30)
+
+Header.Name = "Header"
+Header.Parent = TopBar
+Header.BackgroundTransparency = 1.000
+Header.Position = UDim2.new(0, 1, 0, 0)
+Header.Size = UDim2.new(0.800000012, -60, 1, 0)
+Header.Font = Enum.Font.SourceSansBold
+Header.Text = "VOXELS.RBX"
+Header.TextColor3 = Color3.fromRGB(255, 255, 255)
+Header.TextSize = 24.000
+Header.TextXAlignment = Enum.TextXAlignment.Left
+
+HeaderPadding.Parent = Header
+HeaderPadding.PaddingLeft = UDim.new(0, 7)
+
+MinimizeButton.Name = "MinimizeButton"
+MinimizeButton.Parent = TopBar
+MinimizeButton.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+MinimizeButton.Position = UDim2.new(1, -60, 0, 0)
+MinimizeButton.Size = UDim2.new(0, 30, 0, 30)
+MinimizeButton.Text = "-"
+MinimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+MinimizeButton.TextScaled = true
+MinimizeButton.TextWrapped = true
+
+MinimizeCorner.CornerRadius = UDim.new(0, 2)
+MinimizeCorner.Parent = MinimizeButton
+
+MinimizePadding.Parent = MinimizeButton
+MinimizePadding.PaddingBottom = UDim.new(0, -2)
+MinimizePadding.PaddingTop = UDim.new(0, -3)
+
+ExitButton.Name = "ExitButton"
+ExitButton.Parent = TopBar
+ExitButton.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+ExitButton.Position = UDim2.new(1, -30, 0, 0)
+ExitButton.Size = UDim2.new(0, 30, 0, 30)
+ExitButton.Text = "X"
+ExitButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ExitButton.TextScaled = true
+ExitButton.TextWrapped = true
+
+ExitCorner.CornerRadius = UDim.new(0, 2)
+ExitCorner.Parent = ExitButton
+
+ExitPadding.Parent = ExitButton
+ExitPadding.PaddingBottom = UDim.new(0, 2)
+ExitPadding.PaddingTop = UDim.new(0, 2)
+
+Box.Name = "Box"
+Box.Parent = MainFrame
+Box.BackgroundTransparency = 1.000
+Box.Position = UDim2.new(0, 120, 0, 30)
+Box.Size = UDim2.new(1, -120, 1, -30)
+
+Box1.Name = "Box1"
+Box1.Parent = Box
+Box1.BackgroundTransparency = 1.000
+Box1.Size = UDim2.new(1, 0, 1, 0)
+Box1.CanvasSize = UDim2.new(0, 0, 1, 0)
+Box1.ScrollBarThickness = 0
+
+Box1Layout.Parent = Box1
+Box1Layout.Padding = UDim.new(0, 6)
+
+Box1Padding.Parent = Box1
+Box1Padding.PaddingLeft = UDim.new(0, 10)
+Box1Padding.PaddingRight = UDim.new(0, 10)
+Box1Padding.PaddingTop = UDim.new(0, 10)
+
+ToggleButton.Parent = Box1
+ToggleButton.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+ToggleButton.BorderSizePixel = 0
+ToggleButton.Size = UDim2.new(1, 0, 0, 30)
+ToggleButton.Font = Enum.Font.SourceSans
+ToggleButton.Text = ""
+
+ToggleLabel.Parent = ToggleButton
+ToggleLabel.BackgroundTransparency = 1.000
+ToggleLabel.BorderSizePixel = 0
+ToggleLabel.Size = UDim2.new(1, -40, 1, 0)
+ToggleLabel.Font = Enum.Font.SourceSans
+ToggleLabel.Text = "Toggle Text"
+ToggleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+ToggleLabel.TextScaled = true
+ToggleLabel.TextWrapped = true
+ToggleLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+ToggleLabelSizeConstraint.Parent = ToggleLabel
+ToggleLabelSizeConstraint.MaxTextSize = 25
+
+ToggleLabelPadding.Parent = ToggleLabel
+ToggleLabelPadding.PaddingLeft = UDim.new(0, 5)
+
+ToggleIndicator.Name = "ToggleIndicator"
+ToggleIndicator.Parent = ToggleButton
+ToggleIndicator.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
+ToggleIndicator.BorderColor3 = Color3.fromRGB(20, 40, 50)
+ToggleIndicator.Position = UDim2.new(1, -24, 0.5, -7)
+ToggleIndicator.Size = UDim2.new(0, 14, 0, 14)
+
+Button.Parent = Box1
+Button.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+Button.BorderSizePixel = 0
+Button.Size = UDim2.new(1, 0, 0, 30)
+Button.Font = Enum.Font.SourceSans
+Button.Text = "Button Text"
+Button.TextColor3 = Color3.fromRGB(255, 255, 255)
+Button.TextScaled = true
+Button.TextWrapped = true
+Button.TextXAlignment = Enum.TextXAlignment.Left
+
+ButtonPadding.Parent = Button
+ButtonPadding.PaddingLeft = UDim.new(0, 5)
+
+ButtonSizeConstraint.Parent = Button
+ButtonSizeConstraint.MaxTextSize = 25
+
+KeybindLabel.Name = "KeybindLabel"
+KeybindLabel.Parent = Box1
+KeybindLabel.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+KeybindLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+KeybindLabel.BorderSizePixel = 0
+KeybindLabel.Size = UDim2.new(1, 0, 0, 30)
+KeybindLabel.Font = Enum.Font.SourceSans
+KeybindLabel.Text = "Keybind Text"
+KeybindLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+KeybindLabel.TextScaled = true
+KeybindLabel.TextSize = 14.000
+KeybindLabel.TextWrapped = true
+KeybindLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+KeybindLabelPadding.Parent = KeybindLabel
+KeybindLabelPadding.PaddingLeft = UDim.new(0, 5)
+
+KeybindLabelSizeConstraint.Parent = KeybindLabel
+KeybindLabelSizeConstraint.MaxTextSize = 25
+
+KeybindBox.Parent = KeybindLabel
+KeybindBox.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
+KeybindBox.BorderColor3 = Color3.fromRGB(20, 40, 50)
+KeybindBox.Position = UDim2.new(0.85915494, 0, 0.166666672, 0)
+KeybindBox.Selectable = false
+KeybindBox.Size = UDim2.new(0, 40, 0, 20)
+KeybindBox.Font = Enum.Font.SourceSans
+KeybindBox.PlaceholderColor3 = Color3.fromRGB(140, 140, 140)
+KeybindBox.PlaceholderText = "E"
+KeybindBox.Text = ""
+KeybindBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+KeybindBox.TextScaled = true
+KeybindBox.TextSize = 14.000
+KeybindBox.TextWrapped = true
+
+KeybindBoxPadding.Parent = KeybindBox
+KeybindBoxPadding.PaddingLeft = UDim.new(0, 3)
+KeybindBoxPadding.PaddingRight = UDim.new(0, 3)
+
+KeybindToggleButton.Parent = Box1
+KeybindToggleButton.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+KeybindToggleButton.BorderSizePixel = 0
+KeybindToggleButton.Size = UDim2.new(1, 0, 0, 30)
+KeybindToggleButton.Font = Enum.Font.SourceSans
+KeybindToggleButton.Text = ""
+
+KeybindToggleLabel.Parent = KeybindToggleButton
+KeybindToggleLabel.BackgroundTransparency = 1.000
+KeybindToggleLabel.BorderSizePixel = 0
+KeybindToggleLabel.Size = UDim2.new(0.872222245, -40, 1, 0)
+KeybindToggleLabel.Font = Enum.Font.SourceSans
+KeybindToggleLabel.Text = "Toggle text with Keybind Enabled"
+KeybindToggleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+KeybindToggleLabel.TextScaled = true
+KeybindToggleLabel.TextWrapped = true
+KeybindToggleLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+KeybindToggleLabelSizeConstraint.Parent = KeybindToggleLabel
+KeybindToggleLabelSizeConstraint.MaxTextSize = 25
+
+KeybindToggleLabelPadding.Parent = KeybindToggleLabel
+KeybindToggleLabelPadding.PaddingLeft = UDim.new(0, 5)
+
+KeybindToggleIndicator.Name = "KeybindToggleIndicator"
+KeybindToggleIndicator.Parent = KeybindToggleButton
+KeybindToggleIndicator.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
+KeybindToggleIndicator.BorderColor3 = Color3.fromRGB(20, 40, 50)
+KeybindToggleIndicator.Position = UDim2.new(0.794444442, 0, 0.266666681, 0)
+KeybindToggleIndicator.Size = UDim2.new(0.0388888903, 0, 0.466666669, 0)
+
+KeybindToggleBox.Parent = KeybindToggleButton
+KeybindToggleBox.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
+KeybindToggleBox.BorderColor3 = Color3.fromRGB(20, 40, 50)
+KeybindToggleBox.Position = UDim2.new(0.861111104, 0, 0.166666672, 0)
+KeybindToggleBox.Selectable = false
+KeybindToggleBox.Size = UDim2.new(0.111111112, 0, 0.666666687, 0)
+KeybindToggleBox.Font = Enum.Font.SourceSans
+KeybindToggleBox.PlaceholderColor3 = Color3.fromRGB(140, 140, 140)
+KeybindToggleBox.PlaceholderText = "E"
+KeybindToggleBox.Text = ""
+KeybindToggleBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+KeybindToggleBox.TextScaled = true
+KeybindToggleBox.TextSize = 14.000
+KeybindToggleBox.TextWrapped = true
+
+KeybindToggleBoxPadding.Parent = KeybindToggleBox
+KeybindToggleBoxPadding.PaddingLeft = UDim.new(0, 3)
+KeybindToggleBoxPadding.PaddingRight = UDim.new(0, 3)
+
+InputLabel.Parent = Box1
+InputLabel.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+InputLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+InputLabel.BorderSizePixel = 0
+InputLabel.Size = UDim2.new(1, 0, 0, 30)
+InputLabel.Font = Enum.Font.SourceSans
+InputLabel.Text = "Input Text"
+InputLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+InputLabel.TextScaled = true
+InputLabel.TextSize = 14.000
+InputLabel.TextWrapped = true
+InputLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+InputLabelPadding.Parent = InputLabel
+InputLabelPadding.PaddingLeft = UDim.new(0, 5)
+
+InputLabelSizeConstraint.Parent = InputLabel
+InputLabelSizeConstraint.MaxTextSize = 25
+
+InputBox.Parent = InputLabel
+InputBox.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
+InputBox.BorderColor3 = Color3.fromRGB(20, 40, 50)
+InputBox.Position = UDim2.new(0.774647892, 0, 0.166666672, 0)
+InputBox.Selectable = false
+InputBox.Size = UDim2.new(0, 70, 0, 20)
+InputBox.Font = Enum.Font.SourceSans
+InputBox.PlaceholderColor3 = Color3.fromRGB(140, 140, 140)
+InputBox.PlaceholderText = "input"
+InputBox.Text = "10000000"
+InputBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+InputBox.TextScaled = true
+InputBox.TextSize = 14.000
+InputBox.TextWrapped = true
+
+InputBoxPadding.Parent = InputBox
+InputBoxPadding.PaddingLeft = UDim.new(0, 3)
+InputBoxPadding.PaddingRight = UDim.new(0, 3)
+
+InputBoxAspectRatio.Parent = InputBox
+InputBoxAspectRatio.AspectRatio = 3.500
+
+TabSection.Name = "TabSection"
+TabSection.Parent = MainFrame
+TabSection.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+TabSection.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TabSection.BorderSizePixel = 0
+TabSection.Position = UDim2.new(0, 0, 0.100000001, 0)
+TabSection.Size = UDim2.new(0, 120, 0, 270)
+
+TabList.Name = "TabList"
+TabList.Parent = TabSection
+TabList.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+TabList.BorderSizePixel = 0
+TabList.Position = UDim2.new(0, 1, 0, 0)
+TabList.Size = UDim2.new(1, 0, 1, 0)
+TabList.CanvasSize = UDim2.new(0, 0, 1, 0)
+TabList.ScrollBarThickness = 0
+
+TabListLayout.Parent = TabList
+TabListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+TabListLayout.Padding = UDim.new(0, 5)
+
+MainTabButton.Name = "MainTabButton"
+MainTabButton.Parent = TabList
+MainTabButton.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+MainTabButton.Size = UDim2.new(1, -10, 0, 30)
+MainTabButton.Font = Enum.Font.Arial
+MainTabButton.Text = "Main"
+MainTabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+MainTabButton.TextScaled = true
+MainTabButton.TextWrapped = true
+
+MainTabCorner.CornerRadius = UDim.new(0, 2)
+MainTabCorner.Parent = MainTabButton
+
+MainTabSizeConstraint.Parent = MainTabButton
+MainTabSizeConstraint.MaxTextSize = 22
+
+TabListPadding.Parent = TabList
+TabListPadding.PaddingBottom = UDim.new(0, 5)
+TabListPadding.PaddingTop = UDim.new(0, 5)
+
+PlaceholderTabButton.Name = "PlaceholderTabButton"
+PlaceholderTabButton.Parent = TabList
+PlaceholderTabButton.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+PlaceholderTabButton.Size = UDim2.new(1, -10, 0, 30)
+PlaceholderTabButton.Font = Enum.Font.Arial
+PlaceholderTabButton.Text = "placeholder"
+PlaceholderTabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+PlaceholderTabButton.TextScaled = true
+PlaceholderTabButton.TextWrapped = true
+
+PlaceholderTabCorner.CornerRadius = UDim.new(0, 2)
+PlaceholderTabCorner.Parent = PlaceholderTabButton
+
+PlaceholderTabSizeConstraint.Parent = PlaceholderTabButton
+PlaceholderTabSizeConstraint.MaxTextSize = 22
+
+local UserInputService = game:GetService("UserInputService")
+
+local Library = {}
+Library.__index = Library
+
+local Templates = {
+	ToggleTemplate = ToggleButton,
+	ButtonTemplate = Button,
+	KeybindTemplate = KeybindLabel,
+	KeybindToggleTemplate = KeybindToggleButton,
+	InputTemplate = InputLabel,
+	TabListTemplate = Box1,
+	TabButtonTemplate = MainTabButton,
+}
+
+local function DetachTemplate(instance)
+	local clone = instance:Clone()
+	instance:Destroy()
+	return clone
+end
+
+Templates.ToggleTemplate = DetachTemplate(Templates.ToggleTemplate)
+Templates.ButtonTemplate = DetachTemplate(Templates.ButtonTemplate)
+Templates.KeybindTemplate = DetachTemplate(Templates.KeybindTemplate)
+Templates.KeybindToggleTemplate = DetachTemplate(Templates.KeybindToggleTemplate)
+Templates.InputTemplate = DetachTemplate(Templates.InputTemplate)
+
+PlaceholderTabButton:Destroy()
+
+Templates.TabListTemplate = Box1:Clone()
+Templates.TabButtonTemplate = MainTabButton:Clone()
+
+Box1.Visible = true
+
+local function MakeDraggable(dragHandle, target)
+	local dragging = false
+	local dragInputType
+	local dragStart
+	local startPos
+
+	dragHandle.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1
+			or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragInputType = input.UserInputType
+			dragStart = input.Position
+			startPos = target.Position
+		end
+	end)
+
+	dragHandle.InputEnded:Connect(function(input)
+		if input.UserInputType == dragInputType then
+			dragging = false
+		end
+	end)
+
+	UserInputService.InputChanged:Connect(function(input)
+		if not dragging then
+			return
+		end
+		if input.UserInputType == Enum.UserInputType.MouseMovement
+			or input.UserInputType == Enum.UserInputType.Touch then
+			local delta = input.Position - dragStart
+			target.Position = UDim2.new(
+				startPos.X.Scale, startPos.X.Offset + delta.X,
+				startPos.Y.Scale, startPos.Y.Offset + delta.Y
+			)
+		end
+	end)
+end
+
+local function BindKeybindCapture(textBox, currentKeybind, onChanged)
+	textBox.Text = currentKeybind or ""
+
+	local listening = false
+	local inputConnection
+
+	textBox.Focused:Connect(function()
+		textBox.Text = ""
+		listening = true
+
+		if inputConnection then
+			inputConnection:Disconnect()
+		end
+
+		inputConnection = UserInputService.InputBegan:Connect(function(input, processed)
+			if not listening then
+				return
+			end
+			if input.UserInputType == Enum.UserInputType.Keyboard then
+				local keyName = input.KeyCode.Name:upper()
+				textBox.Text = keyName
+				listening = false
+				textBox:ReleaseFocus()
+				onChanged(keyName)
+			end
+		end)
+	end)
+
+	textBox:GetPropertyChangedSignal("Text"):Connect(function()
+		if not listening then
+			return
+		end
+		if textBox.Text ~= "" then
+			local keyName = textBox.Text:upper()
+			textBox.Text = keyName
+			listening = false
+			textBox:ReleaseFocus()
+			onChanged(keyName)
+		end
+	end)
+
+	textBox.FocusLost:Connect(function()
+		listening = false
+		if textBox.Text == "" then
+			textBox.Text = currentKeybind or ""
+		end
+		if inputConnection then
+			inputConnection:Disconnect()
+			inputConnection = nil
+		end
+	end)
+end
+
+local Window = {}
+Window.__index = Window
+
+function Library:CreateWindow(config)
+	config = config or {}
+
+	if config.Name then
+		Header.Text = config.Name
+	end
+
+	local toggleKeybind = config.ToggleKeybind or Enum.KeyCode.RightShift
+
+	if config.Parent then
+		local targetParent
+
+		if typeof(config.Parent) == "Instance" then
+			targetParent = config.Parent
+		elseif config.Parent == "PlayerGui" then
+			targetParent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+		elseif config.Parent == "CoreGui" then
+			local success, coreGui = pcall(function()
+				return game:GetService("CoreGui")
+			end)
+			if success then
+				targetParent = coreGui
+			end
+		end
+
+		if targetParent then
+			VoxelsUI.Parent = targetParent
+		end
+	end
+
+	local self = setmetatable({}, Window)
+	self.Tabs = {}
+	self.CurrentTab = nil
+	self.TabButtons = {}
+
+	MakeDraggable(TopBar, MainFrame)
+
+	local minimized = false
+	local expandedSize = MainFrame.Size
+	local collapsedSize = UDim2.new(expandedSize.X.Scale, expandedSize.X.Offset, 0, TopBar.Size.Y.Offset)
+
+	local function SetMinimized(value)
+		minimized = value
+		Box.Visible = not minimized
+		TabSection.Visible = not minimized
+		MainFrame.Size = minimized and collapsedSize or expandedSize
+	end
+
+	MinimizeButton.MouseButton1Click:Connect(function()
+		SetMinimized(not minimized)
+	end)
+
+	ExitButton.MouseButton1Click:Connect(function()
+		VoxelsUI.Enabled = false
+	end)
+
+	UserInputService.InputBegan:Connect(function(input, processed)
+		if processed then
+			return
+		end
+		if input.UserInputType == Enum.UserInputType.Keyboard
+			and input.KeyCode == toggleKeybind then
+			VoxelsUI.Enabled = not VoxelsUI.Enabled
+		end
+	end)
+
+	return self
+end
+
+local Tab = {}
+Tab.__index = Tab
+
+function Window:CreateTab(name)
+	name = name or "Tab"
+
+	local isFirstTab = (#self.Tabs == 0)
+
+	local page
+	if isFirstTab then
+		page = Box1
+	else
+		page = Templates.TabListTemplate:Clone()
+		page.Parent = Box
+		page.Visible = false
+	end
+
+	local tabButton
+	if isFirstTab then
+		tabButton = MainTabButton
+		MainTabButton.Text = name
+	else
+		tabButton = Templates.TabButtonTemplate:Clone()
+		tabButton.Text = name
+		tabButton.Parent = TabList
+	end
+
+	local tabObj = setmetatable({}, Tab)
+	tabObj.Page = page
+	tabObj.Button = tabButton
+	tabObj.Window = self
+
+	tabButton.MouseButton1Click:Connect(function()
+		self:SelectTab(tabObj)
+	end)
+
+	table.insert(self.Tabs, tabObj)
+
+	if isFirstTab then
+		self.CurrentTab = tabObj
+		tabButton.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
+	end
+
+	return tabObj
+end
+
+function Window:SelectTab(tabObj)
+	for _, t in ipairs(self.Tabs) do
+		t.Page.Visible = (t == tabObj)
+		t.Button.BackgroundColor3 = (t == tabObj)
+			and Color3.fromRGB(90, 90, 90)
+			or Color3.fromRGB(70, 70, 70)
+	end
+	self.CurrentTab = tabObj
+end
+
+function Tab:CreateToggle(config)
+	config = config or {}
+	local name = config.Name or "Toggle"
+	local default = config.CurrentValue or false
+	local callback = config.Callback or function() end
+
+	local clone = Templates.ToggleTemplate:Clone()
+	clone.Parent = self.Page
+
+	local label = clone:FindFirstChild("TextLabel")
+	local indicator = clone:FindFirstChild("ToggleIndicator")
+
+	label.Text = name
+
+	local toggled = default
+
+	local onColor = Color3.fromRGB(60, 160, 90)
+	local offColor = Color3.fromRGB(90, 90, 90)
+
+	local function Render()
+		indicator.BackgroundColor3 = toggled and onColor or offColor
+	end
+	Render()
+
+	clone.MouseButton1Click:Connect(function()
+		toggled = not toggled
+		Render()
+		callback(toggled)
+	end)
+
+	callback(toggled)
+
+	local toggleObj = {}
+	function toggleObj:Set(value)
+		toggled = value
+		Render()
+		callback(toggled)
+	end
+	function toggleObj:Get()
+		return toggled
+	end
+
+	return toggleObj
+end
+
+function Tab:CreateButton(config)
+	config = config or {}
+	local name = config.Name or "Button"
+	local callback = config.Callback or function() end
+
+	local clone = Templates.ButtonTemplate:Clone()
+	clone.Parent = self.Page
+	clone.Text = name
+
+	clone.MouseButton1Click:Connect(function()
+		callback()
+	end)
+
+	return clone
+end
+
+function Tab:CreateKeybind(config)
+	config = config or {}
+	local name = config.Name or "Keybind"
+	local defaultKeybind = config.CurrentKeybind or "E"
+	local callback = config.Callback or function() end
+
+	local clone = Templates.KeybindTemplate:Clone()
+	clone.Parent = self.Page
+	clone.Text = name
+
+	local keybindBox = clone:FindFirstChild("TextBox")
+	keybindBox.Selectable = true
+
+	local currentKey = defaultKeybind
+
+	BindKeybindCapture(keybindBox, currentKey, function(newKey)
+		currentKey = newKey
+		callback(currentKey)
+	end)
+
+	callback(currentKey)
+
+	local keybindObj = {}
+	function keybindObj:Set(key)
+		currentKey = key
+		keybindBox.Text = key
+		callback(currentKey)
+	end
+	function keybindObj:Get()
+		return currentKey
+	end
+
+	return keybindObj
+end
+
+function Tab:CreateKeybindToggle(config)
+	config = config or {}
+	local name = config.Name or "Toggle"
+	local default = config.CurrentValue or false
+	local defaultKeybind = config.CurrentKeybind or "E"
+	local callback = config.Callback or function() end
+
+	local clone = Templates.KeybindToggleTemplate:Clone()
+	clone.Parent = self.Page
+
+	local label = clone:FindFirstChild("TextLabel")
+	local indicator = clone:FindFirstChild("KeybindToggleIndicator")
+	local keybindBox = clone:FindFirstChild("TextBox")
+	keybindBox.Selectable = true
+
+	label.Text = name
+
+	local toggled = default
+	local currentKey = defaultKeybind
+
+	local onColor = Color3.fromRGB(60, 160, 90)
+	local offColor = Color3.fromRGB(90, 90, 90)
+
+	local function Render()
+		indicator.BackgroundColor3 = toggled and onColor or offColor
+	end
+	Render()
+
+	local function Flip()
+		toggled = not toggled
+		Render()
+		callback(toggled)
+	end
+
+	clone.MouseButton1Click:Connect(Flip)
+
+	BindKeybindCapture(keybindBox, currentKey, function(newKey)
+		currentKey = newKey
+	end)
+
+	UserInputService.InputBegan:Connect(function(input, processed)
+		if processed then
+			return
+		end
+		if input.UserInputType == Enum.UserInputType.Keyboard
+			and input.KeyCode.Name == currentKey then
+			Flip()
+		end
+	end)
+
+	callback(toggled)
+
+	local toggleObj = {}
+	function toggleObj:Set(value)
+		toggled = value
+		Render()
+		callback(toggled)
+	end
+	function toggleObj:Get()
+		return toggled
+	end
+	function toggleObj:SetKeybind(key)
+		currentKey = key
+		keybindBox.Text = key
+	end
+
+	return toggleObj
+end
+
+function Tab:CreateInput(config)
+	config = config or {}
+	local name = config.Name or "Input"
+	local placeholder = config.PlaceholderText or "input"
+	local default = config.DefaultText or ""
+	local callback = config.Callback or function() end
+
+	local clone = Templates.InputTemplate:Clone()
+	clone.Parent = self.Page
+	clone.Text = name
+
+	local inputBox = clone:FindFirstChild("TextBox")
+	inputBox.Selectable = true
+	inputBox.PlaceholderText = placeholder
+	inputBox.Text = default
+
+	inputBox.FocusLost:Connect(function(enterPressed)
+		callback(inputBox.Text)
+	end)
+
+	local inputObj = {}
+	function inputObj:Set(text)
+		inputBox.Text = text
+		callback(text)
+	end
+	function inputObj:Get()
+		return inputBox.Text
+	end
+
+	return inputObj
+end
+
+return Library
