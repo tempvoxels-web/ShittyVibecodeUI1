@@ -245,6 +245,7 @@ local function BuildElementTemplates()
 	TabPage.Size = UDim2.new(1, 0, 1, 0)
 	TabPage.CanvasSize = UDim2.new(0, 0, 1, 0)
 	TabPage.ScrollBarThickness = 0
+	TabPage.ClipsDescendants = false
 	TabPage.Visible = false
 
 	TabPageLayout.Parent = TabPage
@@ -256,12 +257,111 @@ local function BuildElementTemplates()
 	TabPagePadding.PaddingRight = UDim.new(0, 10)
 	TabPagePadding.PaddingTop = UDim.new(0, 10)
 
+	local DropdownLabel = Instance.new("TextLabel")
+	local DropdownLabelPadding = Instance.new("UIPadding")
+	local DropdownLabelSizeConstraint = Instance.new("UITextSizeConstraint")
+	local DropdownBox = Instance.new("TextButton")
+	local DropdownBoxPadding = Instance.new("UIPadding")
+	local DropdownArrow = Instance.new("TextLabel")
+	local DropdownList = Instance.new("ScrollingFrame")
+	local DropdownListLayout = Instance.new("UIListLayout")
+	local DropdownOption = Instance.new("TextButton")
+
+	DropdownLabel.Name = "DropdownLabel"
+	DropdownLabel.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+	DropdownLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	DropdownLabel.BorderSizePixel = 0
+	DropdownLabel.ClipsDescendants = false
+	DropdownLabel.ZIndex = 1
+	DropdownLabel.Size = UDim2.new(1, 0, 0, 30)
+	DropdownLabel.Font = Enum.Font.SourceSans
+	DropdownLabel.Text = "Dropdown Text"
+	DropdownLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+	DropdownLabel.TextScaled = true
+	DropdownLabel.TextSize = 14.000
+	DropdownLabel.TextWrapped = true
+	DropdownLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+	DropdownLabelPadding.Parent = DropdownLabel
+	DropdownLabelPadding.PaddingLeft = UDim.new(0, 5)
+
+	DropdownLabelSizeConstraint.Parent = DropdownLabel
+	DropdownLabelSizeConstraint.MaxTextSize = 25
+
+	DropdownBox.Name = "DropdownBox"
+	DropdownBox.Parent = DropdownLabel
+	DropdownBox.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
+	DropdownBox.BorderColor3 = Color3.fromRGB(20, 40, 50)
+	DropdownBox.Position = UDim2.new(0.774647892, 0, 0.166666672, 0)
+	DropdownBox.Size = UDim2.new(0, 70, 0, 20)
+	DropdownBox.ZIndex = 2
+	DropdownBox.Font = Enum.Font.SourceSans
+	DropdownBox.Text = ""
+	DropdownBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+	DropdownBox.TextScaled = true
+	DropdownBox.TextSize = 14.000
+	DropdownBox.TextWrapped = true
+	DropdownBox.TextXAlignment = Enum.TextXAlignment.Left
+	DropdownBox.AutoButtonColor = false
+
+	DropdownBoxPadding.Parent = DropdownBox
+	DropdownBoxPadding.PaddingLeft = UDim.new(0, 3)
+	DropdownBoxPadding.PaddingRight = UDim.new(0, 14)
+
+	DropdownArrow.Name = "DropdownArrow"
+	DropdownArrow.Parent = DropdownBox
+	DropdownArrow.BackgroundTransparency = 1.000
+	DropdownArrow.AnchorPoint = Vector2.new(1, 0.5)
+	DropdownArrow.Position = UDim2.new(1, -3, 0.5, 0)
+	DropdownArrow.Size = UDim2.new(0, 12, 1, 0)
+	DropdownArrow.ZIndex = 3
+	DropdownArrow.Font = Enum.Font.SourceSansBold
+	DropdownArrow.Text = "v"
+	DropdownArrow.TextColor3 = Color3.fromRGB(255, 255, 255)
+	DropdownArrow.TextScaled = true
+	DropdownArrow.TextWrapped = true
+
+	DropdownList.Name = "DropdownList"
+	DropdownList.Parent = DropdownBox
+	DropdownList.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
+	DropdownList.BorderColor3 = Color3.fromRGB(20, 40, 50)
+	DropdownList.BorderSizePixel = 1
+	DropdownList.AnchorPoint = Vector2.new(0, 0)
+	DropdownList.Position = UDim2.new(0, 0, 1, 2)
+	DropdownList.Size = UDim2.new(1, 0, 0, 0)
+	DropdownList.AutomaticCanvasSize = Enum.AutomaticSize.Y
+	DropdownList.CanvasSize = UDim2.new(0, 0, 0, 0)
+	DropdownList.ScrollBarThickness = 4
+	DropdownList.ZIndex = 10
+	DropdownList.Visible = false
+	DropdownList.ClipsDescendants = true
+
+	DropdownListLayout.Parent = DropdownList
+	DropdownListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+	DropdownOption.Name = "DropdownOption"
+	DropdownOption.Parent = DropdownList
+	DropdownOption.BackgroundColor3 = Color3.fromRGB(90, 90, 90)
+	DropdownOption.BorderSizePixel = 0
+	DropdownOption.Size = UDim2.new(1, 0, 0, 20)
+	DropdownOption.ZIndex = 11
+	DropdownOption.Font = Enum.Font.SourceSans
+	DropdownOption.Text = "Option"
+	DropdownOption.TextColor3 = Color3.fromRGB(255, 255, 255)
+	DropdownOption.TextScaled = true
+	DropdownOption.TextWrapped = true
+	DropdownOption.AutoButtonColor = false
+
+	DropdownOption.Parent = nil
+
 	return {
 		ToggleTemplate = ToggleButton,
 		ButtonTemplate = Button,
 		KeybindTemplate = KeybindLabel,
 		KeybindToggleTemplate = KeybindToggleButton,
 		InputTemplate = InputLabel,
+		DropdownTemplate = DropdownLabel,
+		DropdownOptionTemplate = DropdownOption,
 		TabButtonTemplate = TabButton,
 		TabPageTemplate = TabPage,
 	}
@@ -304,8 +404,15 @@ local function MakeDraggable(dragHandle, target)
 	end)
 end
 
+local function NormalizeKeyName(key)
+	if typeof(key) == "EnumItem" then
+		return key.Name
+	end
+	return key
+end
+
 local function BindKeybindCapture(textBox, currentKeybind, onChanged)
-	textBox.Text = currentKeybind or ""
+	textBox.Text = NormalizeKeyName(currentKeybind) or ""
 
 	local listening = false
 	local inputConnection
@@ -348,7 +455,7 @@ local function BindKeybindCapture(textBox, currentKeybind, onChanged)
 	textBox.FocusLost:Connect(function()
 		listening = false
 		if textBox.Text == "" then
-			textBox.Text = currentKeybind or ""
+			textBox.Text = NormalizeKeyName(currentKeybind) or ""
 		end
 		if inputConnection then
 			inputConnection:Disconnect()
@@ -668,7 +775,7 @@ end
 function Tab:CreateKeybind(config)
 	config = config or {}
 	local name = config.Name or "Keybind"
-	local defaultKeybind = config.CurrentKeybind or "E"
+	local defaultKeybind = NormalizeKeyName(config.CurrentKeybind) or "E"
 	local callback = config.Callback or function() end
 
 	local clone = self.Window.Templates.KeybindTemplate:Clone()
@@ -690,8 +797,8 @@ function Tab:CreateKeybind(config)
 
 	local keybindObj = {}
 	function keybindObj:Set(key)
-		currentKey = key
-		keybindBox.Text = key
+		currentKey = NormalizeKeyName(key)
+		keybindBox.Text = currentKey
 		callback(currentKey)
 	end
 	function keybindObj:Get()
@@ -705,7 +812,7 @@ function Tab:CreateKeybindToggle(config)
 	config = config or {}
 	local name = config.Name or "Toggle"
 	local default = config.CurrentValue or false
-	local defaultKeybind = config.CurrentKeybind or "E"
+	local defaultKeybind = NormalizeKeyName(config.CurrentKeybind) or "E"
 	local callback = config.Callback or function() end
 
 	local clone = self.Window.Templates.KeybindToggleTemplate:Clone()
@@ -764,8 +871,8 @@ function Tab:CreateKeybindToggle(config)
 		return toggled
 	end
 	function toggleObj:SetKeybind(key)
-		currentKey = key
-		keybindBox.Text = key
+		currentKey = NormalizeKeyName(key)
+		keybindBox.Text = currentKey
 	end
 
 	return toggleObj
@@ -802,6 +909,107 @@ function Tab:CreateInput(config)
 	end
 
 	return inputObj
+end
+
+function Tab:CreateDropdown(config)
+	config = config or {}
+	local name = config.Name or "Dropdown"
+	local options = config.Options or {}
+	local default = config.CurrentOption or options[1] or ""
+	local callback = config.Callback or function() end
+
+	local clone = self.Window.Templates.DropdownTemplate:Clone()
+	clone.Parent = self.Page
+	clone.Text = name
+	clone.LayoutOrder = NextOrderFor(self.Page)
+
+	local box = clone:FindFirstChild("DropdownBox")
+	local arrow = box:FindFirstChild("DropdownArrow")
+	local list = box:FindFirstChild("DropdownList")
+	local optionTemplate = self.Window.Templates.DropdownOptionTemplate
+
+	local current = default
+	local open = false
+
+	local function SetText()
+		box.Text = tostring(current)
+	end
+	SetText()
+
+	local optionButtons = {}
+
+	local function CloseList()
+		open = false
+		list.Visible = false
+		arrow.Text = "v"
+	end
+
+	local function OpenList()
+		open = true
+		list.Visible = true
+		arrow.Text = "^"
+	end
+
+	local function SelectOption(value)
+		current = value
+		SetText()
+		CloseList()
+		callback(current)
+	end
+
+	local function RebuildOptions(newOptions)
+		for _, btn in ipairs(optionButtons) do
+			btn:Destroy()
+		end
+		optionButtons = {}
+
+		for i, optionValue in ipairs(newOptions) do
+			local optClone = optionTemplate:Clone()
+			optClone.Text = tostring(optionValue)
+			optClone.LayoutOrder = i
+			optClone.Parent = list
+
+			optClone.MouseButton1Click:Connect(function()
+				SelectOption(optionValue)
+			end)
+
+			table.insert(optionButtons, optClone)
+		end
+
+		list.Size = UDim2.new(1, 0, 0, #newOptions * 20)
+	end
+
+	RebuildOptions(options)
+
+	box.MouseButton1Click:Connect(function()
+		if open then
+			CloseList()
+		else
+			OpenList()
+		end
+	end)
+
+	callback(current)
+
+	local dropdownObj = {}
+	function dropdownObj:Set(value)
+		current = value
+		SetText()
+		callback(current)
+	end
+	function dropdownObj:Get()
+		return current
+	end
+	function dropdownObj:Refresh(newOptions, newDefault)
+		options = newOptions or options
+		RebuildOptions(options)
+		if newDefault ~= nil then
+			current = newDefault
+			SetText()
+		end
+	end
+
+	return dropdownObj
 end
 
 return Library
