@@ -56,10 +56,10 @@ VoxelsUI.ResetOnSpawn = false
 
 MainFrame.Name = "MainFrame"
 MainFrame.Parent = VoxelsUI
-MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+MainFrame.AnchorPoint = Vector2.new(0.5, 0)
 MainFrame.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
 MainFrame.BorderSizePixel = 0
-MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+MainFrame.Position = UDim2.new(0.5, 0, 0.5, -150)
 MainFrame.Size = UDim2.new(0, 500, 0, 300)
 
 TopBar.Name = "TopBar"
@@ -132,6 +132,7 @@ Box1.ScrollBarThickness = 0
 
 Box1Layout.Parent = Box1
 Box1Layout.Padding = UDim.new(0, 6)
+Box1Layout.SortOrder = Enum.SortOrder.LayoutOrder
 
 Box1Padding.Parent = Box1
 Box1Padding.PaddingLeft = UDim.new(0, 10)
@@ -336,6 +337,7 @@ TabList.ScrollBarThickness = 0
 TabListLayout.Parent = TabList
 TabListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 TabListLayout.Padding = UDim.new(0, 5)
+TabListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
 MainTabButton.Name = "MainTabButton"
 MainTabButton.Parent = TabList
@@ -346,6 +348,7 @@ MainTabButton.Text = "Main"
 MainTabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 MainTabButton.TextScaled = true
 MainTabButton.TextWrapped = true
+MainTabButton.LayoutOrder = 0
 
 MainTabCorner.CornerRadius = UDim.new(0, 2)
 MainTabCorner.Parent = MainTabButton
@@ -534,6 +537,7 @@ function Library:CreateWindow(config)
 	self.Tabs = {}
 	self.CurrentTab = nil
 	self.TabButtons = {}
+	self.NextLayoutOrder = 1
 
 	MakeDraggable(TopBar, MainFrame)
 
@@ -585,6 +589,7 @@ function Window:CreateTab(name)
 		page.Parent = Box
 		page.Visible = false
 	end
+	page:SetAttribute("NextLayoutOrder", 1)
 
 	local tabButton
 	if isFirstTab then
@@ -595,6 +600,9 @@ function Window:CreateTab(name)
 		tabButton.Text = name
 		tabButton.Parent = TabList
 	end
+
+	tabButton.LayoutOrder = self.NextLayoutOrder
+	self.NextLayoutOrder = self.NextLayoutOrder + 1
 
 	local tabObj = setmetatable({}, Tab)
 	tabObj.Page = page
@@ -625,6 +633,12 @@ function Window:SelectTab(tabObj)
 	self.CurrentTab = tabObj
 end
 
+local function NextOrderFor(page)
+	local order = page:GetAttribute("NextLayoutOrder") or 1
+	page:SetAttribute("NextLayoutOrder", order + 1)
+	return order
+end
+
 function Tab:CreateToggle(config)
 	config = config or {}
 	local name = config.Name or "Toggle"
@@ -633,6 +647,7 @@ function Tab:CreateToggle(config)
 
 	local clone = Templates.ToggleTemplate:Clone()
 	clone.Parent = self.Page
+	clone.LayoutOrder = NextOrderFor(self.Page)
 
 	local label = clone:FindFirstChild("TextLabel")
 	local indicator = clone:FindFirstChild("ToggleIndicator")
@@ -678,6 +693,7 @@ function Tab:CreateButton(config)
 	local clone = Templates.ButtonTemplate:Clone()
 	clone.Parent = self.Page
 	clone.Text = name
+	clone.LayoutOrder = NextOrderFor(self.Page)
 
 	clone.MouseButton1Click:Connect(function()
 		callback()
@@ -695,6 +711,7 @@ function Tab:CreateKeybind(config)
 	local clone = Templates.KeybindTemplate:Clone()
 	clone.Parent = self.Page
 	clone.Text = name
+	clone.LayoutOrder = NextOrderFor(self.Page)
 
 	local keybindBox = clone:FindFirstChild("TextBox")
 	keybindBox.Selectable = true
@@ -730,6 +747,7 @@ function Tab:CreateKeybindToggle(config)
 
 	local clone = Templates.KeybindToggleTemplate:Clone()
 	clone.Parent = self.Page
+	clone.LayoutOrder = NextOrderFor(self.Page)
 
 	local label = clone:FindFirstChild("TextLabel")
 	local indicator = clone:FindFirstChild("KeybindToggleIndicator")
@@ -800,6 +818,7 @@ function Tab:CreateInput(config)
 	local clone = Templates.InputTemplate:Clone()
 	clone.Parent = self.Page
 	clone.Text = name
+	clone.LayoutOrder = NextOrderFor(self.Page)
 
 	local inputBox = clone:FindFirstChild("TextBox")
 	inputBox.Selectable = true
