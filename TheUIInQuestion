@@ -411,6 +411,15 @@ local function NormalizeKeyName(key)
 	return key
 end
 
+local function ResolveKeybindConfig(config)
+	local raw = config.CurrentKeybind
+		or config.Keybind
+		or config.KeyCode
+		or config.Key
+		or config.Default
+	return NormalizeKeyName(raw)
+end
+
 local function BindKeybindCapture(textBox, currentKeybind, onChanged)
 	textBox.Text = NormalizeKeyName(currentKeybind) or ""
 
@@ -775,7 +784,7 @@ end
 function Tab:CreateKeybind(config)
 	config = config or {}
 	local name = config.Name or "Keybind"
-	local defaultKeybind = NormalizeKeyName(config.CurrentKeybind) or "E"
+	local defaultKeybind = ResolveKeybindConfig(config) or "E"
 	local callback = config.Callback or function() end
 
 	local clone = self.Window.Templates.KeybindTemplate:Clone()
@@ -812,7 +821,7 @@ function Tab:CreateKeybindToggle(config)
 	config = config or {}
 	local name = config.Name or "Toggle"
 	local default = config.CurrentValue or false
-	local defaultKeybind = NormalizeKeyName(config.CurrentKeybind) or "E"
+	local defaultKeybind = ResolveKeybindConfig(config) or "E"
 	local callback = config.Callback or function() end
 
 	local clone = self.Window.Templates.KeybindToggleTemplate:Clone()
