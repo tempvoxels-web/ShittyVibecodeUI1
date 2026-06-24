@@ -243,9 +243,10 @@ local function BuildElementTemplates()
 	TabPage.Name = "TabPage"
 	TabPage.BackgroundTransparency = 1.000
 	TabPage.Size = UDim2.new(1, 0, 1, 0)
-	TabPage.CanvasSize = UDim2.new(0, 0, 1, 0)
-	TabPage.ScrollBarThickness = 0
-	TabPage.ClipsDescendants = false
+	TabPage.CanvasSize = UDim2.new(0, 0, 0, 0)
+	TabPage.AutomaticCanvasSize = Enum.AutomaticSize.Y
+	TabPage.ScrollBarThickness = 4
+	TabPage.ClipsDescendants = true
 	TabPage.Visible = false
 
 	TabPageLayout.Parent = TabPage
